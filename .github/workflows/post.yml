@@ -1,0 +1,89 @@
+name: Post to Threads
+
+# JST = UTC+9。cronはUTC。GitHub Actionsのcronは分単位で遅延するため、
+# 各枠の12分前に起動し、scripts/post.py が目標時刻まで待機して精度を担保する。
+#   07:30 JST = 22:30 UTC(前日) -> 22:18 UTC
+#   12:15 JST = 03:15 UTC       -> 03:03 UTC
+#   18:30 JST = 09:30 UTC       -> 09:18 UTC
+#   21:30 JST = 12:30 UTC       -> 12:18 UTC
+on:
+  schedule:
+    - cron: "18 22 * * *"
+    - cron: "3 3 * * *"
+    - cron: "18 9 * * *"
+    - cron: "18 12 * * *"
+  workflow_dispatch:
+    inputs:
+      slot:
+        description: "投稿する枠"
+        type: choice
+        options: [auto, morning, noon, evening, night]
+        default: auto
+      date:
+        description: "対象日 YYYY-MM-DD（空なら今日のJST日付）"
+        type: string
+        default: ""
+      dry_run:
+        description: "ガードのみ実行し投稿しない"
+        type: boolean
+        default: false
+
+concurrency:
+  # 同じ枠が二重に走らないようにする
+  group: post-threads
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    # 目標時刻までの待機（最大20分）＋画像コンテナ処理を見込む
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate post files
+        run: python scripts/validate.py
+
+      - name: Post
+        id: post
+        env:
+          THREADS_USER_ID: ${{ secrets.THREADS_USER_ID }}
+          THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
+        run: |
+          python scripts/post.py \
+            --slot "${{ inputs.slot || 'auto' }}" \
+            ${{ inputs.date && format('--date {0}', inputs.date) || '' }} \
+            ${{ inputs.dry_run == true && '--dry-run' || '' }}
+
+      - name: Commit post state
+        if: ${{ !cancelled() }}
+        run: |
+          if [ -n "$(git status --porcelain state/)" ]; then
+            git config user.name  "threads-autopost[bot]"
+            git config user.email "actions@users.noreply.github.com"
+            git add state/
+            git commit -m "chore: record posted state"
+            # 別枠のジョブが先にpushしている可能性に備える
+            for i in 1 2 3; do
+              git pull --rebase --autostash origin "${GITHUB_REF_NAME}" && break
+              sleep 5
+            done
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          else
+            echo "state に変更なし"
+          fi
+
+      - name: Flag blocked post
+        if: ${{ steps.post.outputs.blocked == 'true' }}
+        run: |
+          echo "::warning title=投稿をガードで停止::${{ steps.post.outputs.blocked_reason }}"
+          # ガード停止に気づけるよう、ジョブを失敗させて通知を発生させる。
+          # 「正常に止めた」状態だが、無人運用では気づけないと意味がないため。
+          exit 1

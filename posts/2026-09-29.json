@@ -1,0 +1,123 @@
+{
+  "date": "2026-09-29",
+  "weekday": "火",
+  "phase": "Phase 1",
+  "generated_at": "2026-09-28T20:00:00+07:00",
+  "notes": [
+    "link_url と image_url が空の枠は、投稿直前ガードで停止します（fail-closed）。",
+    "reply_text は link_url を埋めたうえで scripts/build_reply.py で生成してください。",
+    "料金は本文に一切含めていません（30日以内に更新確認できるソースがなかったため）。"
+  ],
+  "posts": [
+    {
+      "slot": "morning",
+      "time_jst": "07:30",
+      "title": "高山紅葉前線2026（旭岳・室堂平・千畳敷カール・栗駒山）",
+      "category": "観光",
+      "format_type": "リスト型",
+      "area": "全国横断（北海道/富山/長野/宮城）",
+      "image_route": "⑤ 自作の文字情報カード（写真なし・事実のみ）",
+      "image_needs_specific_facility": false,
+      "expires_on": "2026-10-05",
+      "source_checks": [
+        {
+          "url": "https://www.alpen-route.com/autumn-leaves/",
+          "must_contain": [
+            "室堂"
+          ]
+        },
+        {
+          "url": "https://www.chuo-alps.com/leaves/",
+          "must_contain": [
+            "紅葉"
+          ]
+        }
+      ],
+      "main_text": "【PR】9月末に「紅葉はまだ早い」と思っているなら、標高を見落としています。\n\n立山黒部アルペンルート・室堂平（2,450m）は9月25日更新で「色づきなかば」。公式は室堂平全体の見ごろを9月末から10月上旬と見ています。同じルート上でも大観峰（2,316m）は色づきはじめ、美女平（977m）はまだ。標高1,500mの差が、そのまま時間差です。\n\n中央アルプス・千畳敷カール（2,612m）は9月25日の公式情報で「先週よりも色づきが進んでいます」。ただし昨年比では遅れ気味とのこと。\n\n大雪山旭岳は9月23日の公式ブログで、ロープウェイの車窓から紅葉が見られる状態。\n\n栗駒山（1,626m）は9月17日時点で山頂部が色づき始め。山頂部の見頃は9月下旬から10月上旬、いわかがみ平は10月上旬から中旬と、山ひとつの中で2週間ずれます。\n\n共通するのは「標高2,000m前後から上だけが秋になっている」こと。麓を待つ人と今動く人で、見えるものが別になります。\n\nどの山も朝の光が効きます。前泊できるかが写真の出来を決めます。",
+      "link_url": "https://a.r10.to/hgaTjv",
+      "reply_text": "PR\n\n料金・空室はこちら👇\nhttps://a.r10.to/hgaTjv",
+      "image_url": "https://raw.githubusercontent.com/yellowplane86/threads-autopost/main/images/2026-09-29/morning.png",
+      "require_image": true,
+      "asp": "楽天トラベル（料率・提携状況は管理画面で確認）"
+    },
+    {
+      "slot": "noon",
+      "time_jst": "12:15",
+      "title": "星野リゾート トマム 雲海テラス（今季10月13日終了）",
+      "category": "体験",
+      "format_type": "単体スポット紹介",
+      "area": "北海道",
+      "image_route": "⑤ 自作の文字情報カード（写真なし・事実のみ）",
+      "image_needs_specific_facility": true,
+      "expires_on": "2026-10-13",
+      "source_checks": [
+        {
+          "url": "https://www.snowtomamu.jp/summer/unkai/",
+          "must_contain": [
+            "雲海テラス"
+          ],
+          "must_not_contain": [
+            "今季の営業を終了",
+            "営業を終了しました"
+          ]
+        }
+      ],
+      "main_text": "【PR】星野リゾート トマムの雲海テラス、今季の営業は10月13日で終わります。残り2週間。\n\nここは「行けば見られる」場所ではありません。公式が明記する雲海の発生確率は、営業期間を通して約40%。10回行って4回です。日帰りで組むと、かなりの確率で外します。\n\n今季から予約制になりました。枠が開くのは利用日前日の17時から、先着順。予約にはアソビュー!のアカウントが必要で、ゴンドラは1台4名まで。前日夕方に動けない旅程では、そもそも入れません。\n\n雲海テラスへは徒歩も車も不可、ゴンドラだけ。9月以降は気温10℃以下の日が多く、公式が冬物着用を推奨しています。夜明け前の標高で薄着は無理です。\n\n上に着くと、Cloud Poolや高さ約12mのTOPデッキなど、雲海より先に造形が目に入ります。雲海が出なくても構図が成立するのが、この場所の強さです。\n\n約40%を一発で引くか、泊まって連日挑むか。残り2週間の判断はそこだけです。料金と空室は下のリンクから。",
+      "link_url": "https://a.r10.to/hPJYdq",
+      "reply_text": "PR\n\n料金・空室はこちら👇\nhttps://a.r10.to/hPJYdq",
+      "image_url": "https://raw.githubusercontent.com/yellowplane86/threads-autopost/main/images/2026-09-29/noon.png",
+      "require_image": true,
+      "asp": "楽天トラベル（料率・提携状況は管理画面で確認）"
+    },
+    {
+      "slot": "evening",
+      "time_jst": "18:30",
+      "title": "奥飛騨温泉郷 5温泉地の選び方（新穂高ロープウェイの紅葉）",
+      "category": "宿泊",
+      "format_type": "比較・選び方",
+      "area": "岐阜",
+      "image_route": "⑤ 自作の文字情報カード（写真なし・事実のみ）",
+      "image_needs_specific_facility": false,
+      "expires_on": "2026-10-31",
+      "source_checks": [
+        {
+          "url": "https://shinhotaka-ropeway.jp/",
+          "must_contain": [
+            "営業中"
+          ]
+        }
+      ],
+      "main_text": "【PR】奥飛騨温泉郷の宿を探して「どこも似ている」と思ったなら、地図の読み方が原因かもしれません。\n\n岐阜県の観光公式サイトによれば、奥飛騨温泉郷は平湯・福地・新平湯・栃尾・新穂高という5つの温泉地の総称です。全部まとめて高山市。つまり「奥飛騨で予約した」だけでは、翌朝どこにいるかが決まりません。\n\n目的を新穂高ロープウェイの紅葉に置くと、選び方がはっきりします。公式によれば第1・第2ロープウェイはいずれも営業中で、混雑時は臨時便も出ます。紅葉の見頃は岐阜県観光公式で例年10月上旬から10月下旬。\n\n始発に近い時間で上がりたいなら新穂高温泉泊。移動距離がほぼゼロです。高山方面や平湯発のバス網で行程を組み替えたいなら平湯温泉泊。囲炉裏のある宿など静けさを優先するなら福地温泉。新平湯・栃尾はその中間で、価格帯の幅が広めです。\n\n見頃は10月上旬から。9月末に動く理由は、見てからではなく「押さえてから」だからです。料金は変動制なので、空室と一緒に予約サイトで確認してください。",
+      "link_url": "https://a.r10.to/hPs0x9",
+      "reply_text": "PR\n\n料金・空室はこちら👇\nhttps://a.r10.to/hPs0x9",
+      "image_url": "https://raw.githubusercontent.com/yellowplane86/threads-autopost/main/images/2026-09-29/evening.png",
+      "require_image": true,
+      "asp": "楽天トラベル（料率・提携状況は管理画面で確認）"
+    },
+    {
+      "slot": "night",
+      "time_jst": "21:30",
+      "title": "蔵王温泉「よるの大露天風呂」（10月上旬で終了）",
+      "category": "観光",
+      "format_type": "常識の裏切り",
+      "area": "山形",
+      "image_route": "⑤ 自作の文字情報カード（写真なし・事実のみ）",
+      "image_needs_specific_facility": true,
+      "expires_on": "2026-10-10",
+      "source_checks": [
+        {
+          "url": "https://www.jupeer-zao.com/roten/",
+          "must_contain": [
+            "よるの大露天風呂"
+          ]
+        }
+      ],
+      "main_text": "【PR】「紅葉の露天風呂」と聞くと11月を思い浮かべますが、蔵王ではその順番が逆になります。\n\n蔵王温泉の大露天風呂には、公式サイトによれば6月から10月上旬まで、開催日限定で「よるの大露天風呂」という夜間営業があります。時間は18:30〜21:00、最終受付20:30。山形県の公式観光サイトでも「開催日限定（2026年6月〜10月上旬営業予定）」と案内されています。\n\n夜に入れるのは10月上旬で終わる。一方で標高の高い側が色づき始めるのは10月に入ってから。「夜の露天」と「色づき始めた山」が重なるのは、構造的に年に数回の週末だけ。11月を待つと、夜間営業の側が先に閉まります。\n\n注意点。夜間営業は開催日限定で、日付は公式で確認が必要です。天候や設備点検で休止することもあります。蔵王ロープウェイの紅葉情報は公式サイトではなくFacebookとInstagramで発信されているので、色づきはそちらで直前確認を。\n\n入浴料は公式サイトで最終確認してください。宿は下のリンクから。",
+      "link_url": "https://a.r10.to/hkSKw5",
+      "reply_text": "PR\n\n料金・空室はこちら👇\nhttps://a.r10.to/hkSKw5",
+      "image_url": "https://raw.githubusercontent.com/yellowplane86/threads-autopost/main/images/2026-09-29/night.png",
+      "require_image": true,
+      "asp": "楽天トラベル（料率・提携状況は管理画面で確認）"
+    }
+  ]
+}

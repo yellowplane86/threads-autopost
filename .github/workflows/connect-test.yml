@@ -1,0 +1,46 @@
+name: Threads connection test
+
+# Secrets を入れたあと、これを1回実行して接続を確認する。
+# 公開投稿は一切しない（未公開コンテナを1つ作るだけ。24時間で消える）。
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Check Threads connection
+        env:
+          THREADS_USER_ID: ${{ secrets.THREADS_USER_ID }}
+          THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
+        run: |
+          python scripts/connect.py check | tee /tmp/out.txt
+          {
+            echo '## Threads 接続確認'
+            echo '```'
+            cat /tmp/out.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Dry-run all four slots
+        env:
+          THREADS_USER_ID: ${{ secrets.THREADS_USER_ID }}
+          THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
+        # ガード（ソース生存確認・画像到達性）が実際に機能するかを確認する。
+        # ここで落ちるのは想定内。どのガードが何を言うかを見るのが目的。
+        continue-on-error: true
+        run: |
+          for slot in morning noon evening night; do
+            echo "::group::$slot"
+            python scripts/post.py --slot "$slot" --dry-run --no-wait || true
+            echo "::endgroup::"
+          done
