@@ -83,7 +83,14 @@
         {
           "url": "https://shinhotaka-ropeway.jp/",
           "must_contain": [
-            "営業中"
+            "運行状況",
+            "第2ロープウェイ"
+          ],
+          "must_not_contain": [
+            "運休中",
+            "終日運休",
+            "全線運休",
+            "status-suspend"
           ]
         }
       ],
