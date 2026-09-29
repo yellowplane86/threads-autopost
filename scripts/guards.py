@@ -7,11 +7,15 @@
 from __future__ import annotations
 
 import datetime as dt
+import re
 import urllib.error
 import urllib.request
 from dataclasses import dataclass, field
 
 UA = "nissin-travel-autopost/1.0 (+github-actions)"
+
+# 返信の固定形（2026-09-29 SAITOさん指定）。build_reply.py と共通
+REPLY_TEMPLATE = "料金・空室はこちら👇pr\n{url}"
 
 
 @dataclass
@@ -76,25 +80,15 @@ def check_text(post: dict, text_limit: int, rep: GuardReport) -> None:
     if reply and len(reply) > text_limit:
         rep.fail(f"reply_text が上限超過: {len(reply)}字 > {text_limit}字")
 
+    # PR表記は返信にだけ入れる。本文には入れない（2026-09-29 SAITOさん指定）
+    if re.search(r"PR", main, re.IGNORECASE):
+        rep.fail("main_text にPR表記が入っています（PRは返信だけ）")
+
     if has_link:
-        if not main.startswith("【PR】"):
-            rep.fail("リンクありの投稿なのに main_text が【PR】で始まっていません")
         if not reply:
             rep.fail("link_url があるのに reply_text がありません")
-        else:
-            lines = reply.split("\n")
-            if lines[0].strip() != "PR":
-                rep.fail("reply_text の1行目が 'PR' ではありません")
-            if "料金・空室はこちら👇" not in reply:
-                rep.fail("reply_text に指定の誘導文がありません")
-            urls = [w for w in reply.split() if w.startswith("http")]
-            if len(urls) != 1:
-                rep.fail(f"reply_text 内のURLが1本ではありません（{len(urls)}本）")
-            elif urls[0] != post["link_url"]:
-                rep.fail("reply_text のURLが link_url と一致しません")
-    else:
-        if "【PR】" in main:
-            rep.fail("リンクなしの投稿に【PR】が付いています")
+        elif reply != REPLY_TEMPLATE.format(url=post["link_url"]):
+            rep.fail("reply_text が固定の形（料金・空室はこちら👇pr ／ URL）と一致しません")
 
     if "http" in main:
         rep.fail("main_text にURLが含まれています（URLは返信に1本だけ）")

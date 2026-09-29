@@ -35,7 +35,7 @@
         "main_text": {
           "type": "string",
           "maxLength": 500,
-          "description": "Threads本文。上限500字（改行も1字）。リンクありなら【PR】で始める。URLを含めてはならない"
+          "description": "Threads本文。上限500字（改行も1字）。PR表記を入れない（PRは返信だけ）。URLを含めてはならない"
         },
         "link_url": {
           "type": "string",
@@ -44,7 +44,7 @@
         "reply_text": {
           "type": "string",
           "maxLength": 500,
-          "description": "PR\\n\\n料金・空室はこちら👇\\n<URL> の構造。build_reply.py が生成する"
+          "description": "料金・空室はこちら👇pr\\n<URL> の固定形。build_reply.py が生成する"
         },
         "image_url": {
           "type": "string",

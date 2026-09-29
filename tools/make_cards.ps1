@@ -32,10 +32,7 @@ function Draw-Card($card, $outPath) {
     $accent = New-Object System.Drawing.SolidBrush((C $card.accent))
     $right = New-Object System.Drawing.StringFormat; $right.Alignment = 'Far'
 
-    # PRタグ
-    $prFont = F 'Noto Sans JP Black' 30
-    $g.FillRectangle($white, $W - $M - 84, 70, 84, 50)
-    $g.DrawString('PR', $prFont, (New-Object System.Drawing.SolidBrush((C $card.bg1))), $W - $M - 66, 72)
+    # PR表記は画像に入れない（返信にだけ入れる）
 
     # キッカー
     $g.FillRectangle($accent, $M, 84, 10, 34)

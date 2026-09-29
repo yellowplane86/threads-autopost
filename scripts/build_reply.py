@@ -1,9 +1,7 @@
 """link_url から返信本文を組み立てて posts/*.json に書き戻す。
 
-指示書 v2.0 §11.2 の構造を唯一の正解として扱う:
-    PR
-    （空行）
-    料金・空室はこちら👇
+返信の形は固定（2026-09-29 SAITOさん指定）。PR表記は返信にだけ入れる:
+    料金・空室はこちら👇pr
     <URL>
 
 使い方:
@@ -17,7 +15,7 @@ import json
 import pathlib
 import sys
 
-TEMPLATE = "PR\n\n料金・空室はこちら👇\n{url}"
+from guards import REPLY_TEMPLATE as TEMPLATE
 
 
 def main() -> int:
@@ -62,7 +60,7 @@ def main() -> int:
         print(
             "\nlink_url が未設定の枠: "
             + ", ".join(missing)
-            + "\nこれらは投稿直前ガードで停止します（リンクなしで【PR】付きの投稿は流しません）。"
+            + "\nこれらは投稿直前ガードで停止します（リンクのない枠は流しません）。"
         )
     return 0
 
