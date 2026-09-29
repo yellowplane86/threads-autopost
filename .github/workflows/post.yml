@@ -7,11 +7,11 @@ name: Post to Threads
 #   18:30 JST = 09:30 UTC       -> 09:18 UTC
 #   21:30 JST = 12:30 UTC       -> 12:18 UTC
 on:
-  schedule:
-    - cron: "18 22 * * *"
-    - cron: "3 3 * * *"
-    - cron: "18 9 * * *"
-    - cron: "18 12 * * *"
+  # schedule:  # 一時停止中：Threads接続（Secrets設定）後に戻す
+  #   - cron: "18 22 * * *"
+  #   - cron: "3 3 * * *"
+  #   - cron: "18 9 * * *"
+  #   - cron: "18 12 * * *"
   workflow_dispatch:
     inputs:
       slot:
